@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026鳳甲午宴志工指南</title>
+
+    <!-- 引入 Tailwind CSS 進行排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 pb-10 text-gray-800">
+
+    <!-- 頂部導覽列 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-center relative">
+            <h1 class="text-xl font-bold text-red-700 tracking-wide">2026 鳳甲午宴活動網</h1>
+        </div>
+    </header>
+
+    <!-- 內容渲染區塊 -->
+    <main id="app" class="max-w-md mx-auto px-4 py-6"></main>
+
+    <script>
+        // ==========================================
+        // 1. 資料區塊 
+        // ==========================================
+        const GLOBAL_INFO = {
+            director: "劉淑瓊",
+            commanders: "黃渝豪、黃國全"
+        };
+
+        const VOLUNTEER_DATA = [
+            {
+                id: "A",
+                name: "A. 報到與活動Ａ組",
+                leader: "蕭寶森",
+                shortDuty: "前期簽到，後期活動協助",
+                members: "蕭寶森、劉素文、龔貞夙、王淑惠、林怡蘋、葉秋華、嚴雪菁、陳妹季、王秋霞、賴明玲、陳永香",
+                phase1: "【3 條報到線】\n1.(4人)\n  1-1.會員簽到(10:10~11:00)\n  1-2.友會/來賓/顧問(發伴手禮+獎盃盒)報到(11:00~12:20)\n2.物資捐贈費*2\n3.旅遊費*1\n4.發摸彩兌換卷: 會員\n5.發兩張一桶金(贊助): 志工\n*陳妹季、王秋霞、賴明玲、陳永香顧到 12:20",
+                phase2: "【舞台與獎品支援】\n1. 嚴雪菁：帳務總結算與保管。\n2. 寶森/貞夙/秋霞：摸彩兌換卷、獎品與一桶金整理、顧問名單。\n3. 素文/寶森：傳遞抽獎箱與麥克風。"
+            },
+            {
+                id: "B",
+                name: "B. 場地與活動Ｂ組",
+                leader: "黃國全",
+                shortDuty: "前期場地佈置，後期場內機動",
+                members: "劉汰峰、張文河、簡登豪、劉子健、楊宗憲、蕭語晨、王柏宇",
+                phase1: "【場地佈置與確認】\n1. 10:20前完成所有海報、造景與桌牌佈置。\n2. 動線引導標示張貼與桌卡擺放。",
+                phase2: "【場內機動與復原】\n1. 午宴期間場內突發狀況排除。\n2. 協助傳遞獎品或道具。\n3. 宴會結束後場地復原與物資清點。"
+            },
+            {
+                id: "C",
+                name: "C. 多媒體與拍照組",
+                leader: "陳瀅之",
+                shortDuty: "全場貫穿攝影，捕捉活動關鍵",
+                members: "蔣昌憲、洪楷恩、黃恩佐",
+                phase1: "【全場貫穿，鎖定關鍵】\n1. 拍攝志工大合照與場佈花絮。\n2. 捕捉會員、貴賓及理監事報到互動畫面。",
+                phase2: "【舞台與花絮】\n1. 記錄大會舞、致詞與摸彩等舞台精彩瞬間。\n2. 捕捉台下各桌互動、合照與活動歡樂氣氛。"
+            },
+            {
+                id: "D",
+                name: "D. 機動游擊組",
+                leader: "康旭智",
+                shortDuty: "無固定崗位，隨時支援與補位",
+                members: "黃守義、翁茂松",
+                phase1: "【無固定崗位，隨時補位】\n1. 協助各組處理突發狀況，機動調度。\n2. 巡視會場動線（含報到處至場內），確保順暢。",
+                phase2: "【機動支援】\n1. 午宴期間場內突發狀況排除。\n2. 隨時支援人力吃緊的崗位（如傳遞獎品、引導動線等）。"
+            },
+            {
+                id: "E",
+                name: "E. 硬體控制",
+                leader: "黃瑜楓",
+                shortDuty: "掌控燈光音響，確認所有檔案播放",
+                members: "黃瑜楓",
+                phase1: "【硬體設備與檔案確認】\n1. 確認最新版「大會詳細流程表」 (V已完成)\n2. 測試「大會背景簡報」 (V已完成)\n3. 測試音控設備，預播「迎賓影片+倒數影片」\n4. 測試「鳳甲的歌+MV」與「各友會祝壽影片」 (V已完成)",
+                phase2: "【全場硬體掌控】\n1. 配合流程準確播放音樂、影片與簡報。\n2. 掌控燈光（倒數時配合調暗）與音量，確保環節順暢銜接。"
+            },
+            {
+                id: "F",
+                name: "F. 主持人",
+                leader: "無",
+                shortDuty: "掌控全場氣氛與大會議程進度",
+                members: "小彬、恩綺、小萍",
+                phase1: "【流程梳理與彩排】\n1. 熟悉大會與午宴詳細流程。\n2. 配合理監事與貴賓進行走位彩排與時間掌控確認。",
+                phase2: "【全場氣氛掌控】\n1. 帶動全場大會舞與活動開場氣氛。\n2. 逐一介紹與會嘉賓，引導長官致詞。\n3. 掌控摸彩環節節奏與全場互動。"
+            }
+        ];
+
+        const SCHEDULE_DATA = [
+            { time: "09:30 - 10:20", title: "工作人員集合與場佈", desc: "志工依據動態矩陣就定位，10:20 前完成所有海報、造景與桌牌佈置。" },
+            { time: "10:30 - 11:00", title: "會員報到 & 理監事彩排", desc: "開放會員簽到，同步進行理監事走位與彩排。" },
+            { time: "11:00 - 11:50", title: "會員大會開始", desc: "進行大會議程。" },
+            { time: "11:50 - 12:06", title: "中場休息 & 場地整理", desc: "準備進入午宴階段，機動組巡視動線。" },
+            { time: "12:06 - 12:07", title: "午宴正式開場", desc: "音控/影像準備就緒。" },
+            { time: "12:07 - 12:08", title: "播放歡迎與倒數影片(4/16錄影)", desc: "全場燈光配合調暗，聚焦大螢幕。" },
+            { time: "12:08 - 12:14", title: "理監事+三個舞蹈團大進場+迎賓舞(看我聽我)", desc: "炒熱開場氣氛。" },
+            { time: "12:14 - 12:20", title: "全場大會舞+台下大合照/7首歌串播", desc: "炒熱開場氣氛。" },
+            { time: "12:20 - 12:30", title: "介紹與會嘉賓", desc: "司儀/主持人逐一介紹蒞臨長官與貴賓。" },
+            { time: "12:30 - 12:43", title: "理事長致詞 & 全體理監事上台", desc: "(邀請來賓顧問上台)(五位來賓致詞)\n展現協會核心團隊向心力。" },
+            { time: "12:43 - 13:00", title: "慶生儀式", desc: "(首席顧問林岱樺推蛋糕出場+致詞)(播放各友會祝賀影片)\n播放祝賀影片 ➡️ 齊唱生日快樂歌 ➡️ 切蛋糕儀式。" },
+            { time: "13:00 - 13:05", title: "頒發顧問聘書 & 大合照", desc: "(邀請首席顧問頒發顧問聘書)\n頒發聘書，並邀請首席顧問致詞，隨後進行大合照。" },
+            { time: "13:05 - 13:10", title: "鳳甲 114 年精彩回顧(15週年曲)", desc: "播放協會年度回顧影片。" },
+            { time: "13:10 - 13:15", title: "表演 1：唐寶寶打擊樂", desc: "第一個溫馨開場表演。" },
+            { time: "13:15 - 13:20", title: "表演 2：渝豪 節目表演", desc: "鳳甲演出代表。" },
+            { time: "13:20 - 13:25", title: "表演 3：歡樂你我他舞蹈", desc: "舞蹈表演。" },
+            { time: "13:25 - 13:30", title: "表演 4：滾蕾絲舞蹈", desc: "舞蹈表演。" },
+            { time: "13:30 - 13:40", title: "第一階段摸彩", desc: "邀請長官或貴賓抽出。" },
+            { time: "13:40 - 13:45", title: "表演 5：敬舞蹈", desc: "舞蹈表演。" },
+            { time: "13:45 - 13:50", title: "表演 6：威秀舞蹈團", desc: "專業舞蹈演出。" },
+            { time: "13:50 - 14:00", title: "表演 7：原住民舞蹈", desc: "包含與台下賓客的互動環節。" },
+            { time: "14:00 - 14:20", title: "小蘋果樂團 (歌唱)", desc: "午宴後半段的音樂饗宴。" },
+            { time: "14:20 - 14:30", title: "最後階段電視摸彩、一桶金", desc: "壓軸大獎抽出，掀起最後高潮。" },
+            { time: "14:30 - ", title: "活動圓滿結束", desc: "伴奏播放散場音樂，志工轉入撤場結算期。" }
+        ];
+
+        const MEMBER_LIST = [
+            "周忠信", "劉淑瓊", "黃國全", "張文河", "嚴雪菁", "顏吳美麗", "王淑惠", "簡登豪", "蕭寶森", "楊宗憲",
+            "葉秋華", "劉素文", "翁淑惠", "劉子健", "黃守義", "劉汰峰", "黃渝豪", "黃瑜楓", "劉文仲", "陳美珠",
+            "嚴雪琪", "吳玉春", "劉婉瑩", "康旭智", "黃麗文", "林進忠", "黃明川", "黃周璧玉", "黃秀月", "黃明來",
+            "黃林月美", "詹萍", "龔貞夙", "翁茂松", "陳妹季", "王秋霞", "陳惠真", "林怡蘋", "賴明玲", "林坤葆",
+            "尹秀蘭", "黃永漢", "胡恩綺", "陳李淑華", "陳重任", "鄭杏林", "陳百琮", "鄭再發", "董其正", "張玲珠",
+            "黃陳貴玉", "李麗莊", "陳永香", "何珮君", "謝志祥", "賴美玉", "謝數雄", "謝林麗珠", "陳景達", "陳林春美",
+            "徐順和", "徐楊水枝", "徐陽成", "王春合", "許黃引", "林水珠", "廖双和", "周寶媚", "黃漢經", "古梵筠",
+            "蕭美惠", "周惠華", "周惠娟", "鄧瑞緣", "莊燦堂", "吳金鳳", "簡合法", "陳翠鑾", "翁棟樑", "李得勝",
+            "劉玉珠", "羅傳淑", "劉掙輝", "張國漢", "郭月新", "歐玉美", "黃寶珠", "何隆枝", "薛換花", "黃寶慧",
+            "莊佳萱", "楊壬招", "洪有儀", "鐘金葉", "邱麗瑩", "廖武雄", "陳霈玲", "葛簡春好", "陳月美", "黃月祝",
+            "廖雅鈴", "葉錦蘭", "徐瑞祥", "何昭武", "陳清泉", "龔靖惠", "陳麗珠", "王美雅", "陳素貞", "曾月眸",
+            "李芳義", "吳奇聰", "劉佳玲", "鄭育欣", "蕭秀玲", "陳貴金", "林佩樺"
+        ];
+
+        const CONSULTANT_LIST = [
+            "江瑞鴻", "余南興", "吳星鋒", "巫忠賢", "李汶彥", "李秀蕊", "李雨庭", "李書賢", "林純銓", "林智鴻",
+            "林煙", "邱俊憲", "柯秀華", "孫樹評", "張漢忠", "張簡智鵬", "許玉璋", "陳正寵", "陳建銘", "陳義雄",
+            "陳慧文", "游智鈞", "馮駿林", "黃名賜", "黃保祥", "楊成發", "董建新", "蔡駿宏", "戴育仁", "韓豫平"
+        ];
+
+        // ==========================================
+        // 2. 渲染邏輯
+        // ==========================================
+        const app = document.getElementById('app');
+
+        // 圖示資源
+        const icons = {
+            pin: `<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>`,
+            calendar: `<svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`,
+            usersList: `<svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`,
+            list: `<svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>`,
+            user: `<svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>`,
+            chevronRight: `<svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>`,
+            chevronLeft: `<svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>`,
+            users: `<svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>`,
+            clock: `<svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+            utensils: `<svg class="w-5 h-5 mr-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"></path></svg>`,
+            award: `<svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>`
+        };
+
+        function formatText(text) {
+            return text.replace(/\n/g, '<br/>');
+        }
+
+        // 渲染主頁 
+        window.renderHome = function () {
+            let groupsHtml = VOLUNTEER_DATA.map(group => `
+                <button onclick="renderGroup('${group.id}')" class="w-full bg-white border border-gray-200 p-4 rounded-2xl shadow-sm hover:shadow-md active:bg-gray-50 flex items-center justify-between text-left transition-all">
+                    <div class="flex items-center w-full pr-2">
+                        <div class="w-14 h-14 bg-red-50 border border-red-100 text-red-700 rounded-full flex items-center justify-center font-black text-2xl mr-4 shrink-0 shadow-inner">
+                            ${group.id}
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-gray-800 text-lg mb-0.5">${group.name.substring(3)}</h4>
+                            <p class="text-gray-600 text-sm flex items-center mb-1 font-medium">
+                                ${icons.user} 組長: <span class="text-gray-800 ml-1">${group.leader}</span>
+                            </p>
+                            <p class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded inline-block mt-1">
+                                ${group.shortDuty}
+                            </p>
+                        </div>
+                    </div>
+                    ${icons.chevronRight}
+                </button>
+            `).join('');
+
+            app.innerHTML = `
+                <div class="space-y-5 fade-in">
+                    <!-- 指揮中心卡片 -->
+                    <div class="bg-gradient-to-br from-red-600 to-red-800 text-white p-5 rounded-2xl shadow-lg">
+                        <h2 class="text-xl font-bold mb-4 border-b border-red-400/50 pb-2 flex items-center">
+                            ${icons.pin} 大會指揮中心
+                        </h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-red-200 text-sm mb-1">活動負責人</p>
+                                <p class="font-semibold text-lg">${GLOBAL_INFO.director}</p>
+                            </div>
+                            <div>
+                                <p class="text-red-200 text-sm mb-1">活動總指揮</p>
+                                <p class="font-semibold text-lg">${GLOBAL_INFO.commanders}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- 活動流程按鈕 -->
+                        <button onclick="renderSchedule()" class="w-full bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-white p-4 rounded-2xl shadow-md flex items-center justify-between transition-colors">
+                            <div class="flex items-center text-lg font-bold">
+                                ${icons.calendar} 活動詳細流程
+                            </div>
+                            <div class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
+                                查看時刻表
+                            </div>
+                        </button>
+                        
+                        <!-- 顧問名單按鈕 -->
+                        <button onclick="renderConsultants()" class="w-full bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 text-white p-4 rounded-2xl shadow-md flex items-center justify-between transition-colors">
+                            <div class="flex items-center text-lg font-bold">
+                                ${icons.award} 大會顧問名單
+                            </div>
+                            <div class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
+                                共 ${CONSULTANT_LIST.length} 人
+                            </div>
+                        </button>
+
+                        <!-- 會員名單按鈕 -->
+                        <button onclick="renderMembers()" class="w-full bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white p-4 rounded-2xl shadow-md flex items-center justify-between transition-colors">
+                            <div class="flex items-center text-lg font-bold">
+                                ${icons.usersList} 大會會員名單
+                            </div>
+                            <div class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
+                                共 ${MEMBER_LIST.length} 人
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- 分組任務列表 -->
+                    <div class="pt-2">
+                        <h3 class="text-gray-800 font-bold text-lg mb-3 flex items-center">
+                            ${icons.list} 志工分組任務
+                        </h3>
+                        <div class="grid grid-cols-1 gap-3">
+                            ${groupsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // 渲染組別詳細頁 
+        window.renderGroup = function (groupId) {
+            const group = VOLUNTEER_DATA.find(g => g.id === groupId);
+            if (!group) return;
+
+            app.innerHTML = `
+                <div class="space-y-4 slide-in">
+                    <button onclick="renderHome()" class="flex items-center text-red-600 font-bold mb-2 py-2 active:opacity-70 transition-opacity">
+                        ${icons.chevronLeft} 返回主頁
+                    </button>
+
+                    <h2 class="text-2xl font-black text-gray-800 mb-4">${group.name}</h2>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                        <!-- 成員 -->
+                        <div class="p-5 border-b border-gray-100 bg-gray-50/50">
+                            <h3 class="font-bold text-gray-800 flex items-center mb-2 text-lg">
+                                ${icons.users} 小組成員
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed text-base">${group.members}</p>
+                        </div>
+
+                        <!-- Phase 1 -->
+                        <div class="p-5 border-b border-gray-100">
+                            <h3 class="font-bold text-gray-800 flex items-center mb-3 text-lg">
+                                ${icons.clock} Phase 1: 迎賓 (10:30 - 12:00)
+                            </h3>
+                            <div class="bg-green-50/80 p-4 rounded-xl text-green-900 leading-relaxed text-base border border-green-100">
+                                ${formatText(group.phase1)}
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="p-5">
+                            <h3 class="font-bold text-gray-800 flex items-center mb-3 text-lg">
+                                ${icons.utensils} Phase 2: 午宴 (12:20 - 14:00)
+                            </h3>
+                            <div class="bg-orange-50/80 p-4 rounded-xl text-orange-900 leading-relaxed text-base border border-orange-100">
+                                ${formatText(group.phase2)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        };
+
+        // 渲染活動流程頁
+        window.renderSchedule = function () {
+            let scheduleHtml = SCHEDULE_DATA.map((item) => `
+                <div class="relative pl-6 hover:bg-red-50/50 rounded-xl transition-colors p-2 -ml-2 mb-2">
+                    <div class="absolute left-[1px] top-3 w-4 h-4 rounded-full bg-red-500 border-4 border-red-50 shadow-sm"></div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                        <div class="text-sm font-black text-red-600 mb-1">${item.time}</div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">${formatText(item.title)}</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">${formatText(item.desc)}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            app.innerHTML = `
+                <div class="space-y-4 slide-in">
+                    <button onclick="renderHome()" class="flex items-center text-red-600 font-bold mb-2 py-2 active:opacity-70 transition-opacity">
+                        ${icons.chevronLeft} 返回主頁
+                    </button>
+
+                    <h2 class="text-2xl font-black text-gray-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        大會詳細流程表
+                    </h2>
+
+                    <div class="relative border-l-2 border-red-200 ml-3 md:ml-4 pb-8 mt-4">
+                        ${scheduleHtml}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        };
+
+        // 渲染會員名單頁
+        window.renderMembers = function () {
+            let membersHtml = MEMBER_LIST.map((name, index) => `
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm mr-3 shrink-0">
+                        ${index + 1}
+                    </div>
+                    <div class="font-bold text-gray-700 text-sm sm:text-base">${name}</div>
+                </div>
+            `).join('');
+
+            app.innerHTML = `
+                <div class="space-y-4 slide-in">
+                    <button onclick="renderHome()" class="flex items-center text-red-600 font-bold mb-2 py-2 active:opacity-70 transition-opacity">
+                        ${icons.chevronLeft} 返回主頁
+                    </button>
+
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-black text-gray-800 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            大會會員名單
+                        </h2>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-full">共 ${MEMBER_LIST.length} 人</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pb-8">
+                        ${membersHtml}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        };
+
+        // 渲染顧問名單頁
+        window.renderConsultants = function () {
+            let consultantsHtml = CONSULTANT_LIST.map((name, index) => `
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm mr-3 shrink-0">
+                        ${index + 1}
+                    </div>
+                    <div class="font-bold text-gray-700 text-sm sm:text-base">${name}</div>
+                </div>
+            `).join('');
+
+            app.innerHTML = `
+                <div class="space-y-4 slide-in">
+                    <button onclick="renderHome()" class="flex items-center text-red-600 font-bold mb-2 py-2 active:opacity-70 transition-opacity">
+                        ${icons.chevronLeft} 返回主頁
+                    </button>
+
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-black text-gray-800 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            大會顧問名單
+                        </h2>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-full">共 ${CONSULTANT_LIST.length} 人</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pb-8">
+                        ${consultantsHtml}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        };
+
+        // 啟動應用程式
+        renderHome();
+    </script>
+</body>
+
+</html>
