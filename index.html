@@ -1,54 +1,32 @@
+2026鳳甲關懷協會網站
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026鳳甲午宴志工指南</title>
-
+    
     <!-- 引入 Tailwind CSS 進行排版 -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif; 
             -webkit-tap-highlight-color: transparent;
         }
-
-        .fade-in {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-
-        .slide-in {
-            animation: slideIn 0.3s ease-out forwards;
-        }
-
+        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .slide-in { animation: slideIn 0.3s ease-out forwards; }
+        
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
-
 <body class="bg-gray-50 pb-10 text-gray-800">
 
     <!-- 頂部導覽列 -->
@@ -123,7 +101,7 @@
                 shortDuty: "掌控全場氣氛與大會議程進度",
                 members: "小彬、恩綺、小萍",
                 phase1: "【流程梳理與彩排】\n1. 熟悉大會與午宴詳細流程。\n2. 配合理監事與貴賓進行走位彩排與時間掌控確認。",
-                phase2: "【全場氣氛掌控】\n1. 帶動全場大會舞與活動開場氣氛。\n2. 逐一介紹與會嘉賓，引導長官致詞。\n3. 掌控摸彩環節節奏與全場互動。"
+                phase2: "【分階段主持任務】\n1. 恩綺 (12:00~13:10)：負責開場至「鳳甲114年精彩回顧」結束。\n2. 小彬 (13:10~14:00)：負責「表演1」至「原住民表演」結束。\n3. 小萍 (14:00~活動結束)：負責「小蘋果樂團壓軸」與「大獎摸彩」。"
             }
         ];
 
@@ -137,12 +115,16 @@
             { time: "12:08 - 12:14", title: "理監事+三個舞蹈團大進場+迎賓舞(看我聽我)", desc: "炒熱開場氣氛。" },
             { time: "12:14 - 12:20", title: "全場大會舞+台下大合照/7首歌串播", desc: "炒熱開場氣氛。" },
             { time: "12:20 - 12:30", title: "介紹與會嘉賓", desc: "司儀/主持人逐一介紹蒞臨長官與貴賓。" },
-            { time: "12:30 - 12:43", title: "理事長致詞 & 全體理監事上台", desc: "(邀請來賓顧問上台)(五位來賓致詞)\n展現協會核心團隊向心力。" },
-            { time: "12:43 - 13:00", title: "慶生儀式", desc: "(首席顧問林岱樺推蛋糕出場+致詞)(播放各友會祝賀影片)\n播放祝賀影片 ➡️ 齊唱生日快樂歌 ➡️ 切蛋糕儀式。" },
+            { time: "12:30 - 12:33", title: "理事長致詞+全體理監事上台", desc: "展現協會核心團隊向心力。" },
+            { time: "12:33 - 12:40", title: "來賓代表致賀詞", desc: "5位來賓代表致賀詞。" },
+            { time: "12:40 - 12:44", title: "推出生日蛋糕", desc: "首席顧問+理事長推出蛋糕。" },
+            { time: "12:44 - 12:47", title: "全體合唱生日快樂歌", desc: "慶祝活動高潮。" },
+            { time: "12:47 - 12:50", title: "大合照", desc: "理監事與貴賓合影留念。" },
+            { time: "12:50 - 13:00", title: "播放各友會祝賀影片", desc: "觀賞友會祝賀影片。" },
             { time: "13:00 - 13:05", title: "頒發顧問聘書 & 大合照", desc: "(邀請首席顧問頒發顧問聘書)\n頒發聘書，並邀請首席顧問致詞，隨後進行大合照。" },
             { time: "13:05 - 13:10", title: "鳳甲 114 年精彩回顧(15週年曲)", desc: "播放協會年度回顧影片。" },
             { time: "13:10 - 13:15", title: "表演 1：唐寶寶打擊樂", desc: "第一個溫馨開場表演。" },
-            { time: "13:15 - 13:20", title: "表演 2：渝豪 節目表演", desc: "鳳甲演出代表。" },
+            { time: "13:15 - 13:20", title: "表演 2：鳳甲之星 霄凌.Lawliet", desc: "鳳甲演出代表。" },
             { time: "13:20 - 13:25", title: "表演 3：歡樂你我他舞蹈", desc: "舞蹈表演。" },
             { time: "13:25 - 13:30", title: "表演 4：滾蕾絲舞蹈", desc: "舞蹈表演。" },
             { time: "13:30 - 13:40", title: "第一階段摸彩", desc: "邀請長官或貴賓抽出。" },
@@ -170,9 +152,10 @@
         ];
 
         const CONSULTANT_LIST = [
-            "江瑞鴻", "余南興", "吳星鋒", "巫忠賢", "李汶彥", "李秀蕊", "李雨庭", "李書賢", "林純銓", "林智鴻",
-            "林煙", "邱俊憲", "柯秀華", "孫樹評", "張漢忠", "張簡智鵬", "許玉璋", "陳正寵", "陳建銘", "陳義雄",
-            "陳慧文", "游智鈞", "馮駿林", "黃名賜", "黃保祥", "楊成發", "董建新", "蔡駿宏", "戴育仁", "韓豫平"
+            "林岱樺", "黃保祥", "顏文章", "李汶彥", "張漢忠", "余南興", "江瑞鴻", "韓豫平", "邱俊憲", "林煙", 
+            "林智鴻", "巫忠賢", "陳慧文", "李秀蕊", "李雨庭", "陳建銘", "戴育仁", "黃名賜", "張簡智鵬", "許玉璋", 
+            "游智鈞", "馮駿林", "董建新", "吳星鋒", "林純銓", "陳義雄", "陳正寵", "柯秀華", "孫樹評", "蔡駿宏", 
+            "楊成發", "李書賢"
         ];
 
         // ==========================================
@@ -200,7 +183,7 @@
         }
 
         // 渲染主頁 
-        window.renderHome = function () {
+        window.renderHome = function() {
             let groupsHtml = VOLUNTEER_DATA.map(group => `
                 <button onclick="renderGroup('${group.id}')" class="w-full bg-white border border-gray-200 p-4 rounded-2xl shadow-sm hover:shadow-md active:bg-gray-50 flex items-center justify-between text-left transition-all">
                     <div class="flex items-center w-full pr-2">
@@ -286,9 +269,9 @@
         };
 
         // 渲染組別詳細頁 
-        window.renderGroup = function (groupId) {
+        window.renderGroup = function(groupId) {
             const group = VOLUNTEER_DATA.find(g => g.id === groupId);
-            if (!group) return;
+            if(!group) return;
 
             app.innerHTML = `
                 <div class="space-y-4 slide-in">
@@ -333,7 +316,7 @@
         };
 
         // 渲染活動流程頁
-        window.renderSchedule = function () {
+        window.renderSchedule = function() {
             let scheduleHtml = SCHEDULE_DATA.map((item) => `
                 <div class="relative pl-6 hover:bg-red-50/50 rounded-xl transition-colors p-2 -ml-2 mb-2">
                     <div class="absolute left-[1px] top-3 w-4 h-4 rounded-full bg-red-500 border-4 border-red-50 shadow-sm"></div>
@@ -365,7 +348,7 @@
         };
 
         // 渲染會員名單頁
-        window.renderMembers = function () {
+        window.renderMembers = function() {
             let membersHtml = MEMBER_LIST.map((name, index) => `
                 <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 flex items-center">
                     <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm mr-3 shrink-0">
@@ -398,7 +381,7 @@
         };
 
         // 渲染顧問名單頁
-        window.renderConsultants = function () {
+        window.renderConsultants = function() {
             let consultantsHtml = CONSULTANT_LIST.map((name, index) => `
                 <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 flex items-center">
                     <div class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm mr-3 shrink-0">
@@ -434,5 +417,4 @@
         renderHome();
     </script>
 </body>
-
 </html>
